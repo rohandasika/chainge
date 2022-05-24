@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { EthereumAuthProvider, useViewerConnection } from "@self.id/framework";
 
 const mumbaiChainId = "0x13881";
 const devChainId = 1337;
 const localhostChainId = `0x${Number(devChainId).toString(16)}`;
 
 export default function ConnectWallet(props) {
+  const [correctNetwork, setCorrectNetwork] = useState(false);
+  const [connection, connect, disconnect] = useViewerConnection();
+
   // Checks if wallet is connected
   async function checkIfWalletConnected() {
     if (window.ethereum) {
@@ -28,35 +32,9 @@ export default function ConnectWallet(props) {
     console.log("Connected to chain:" + chainId);
 
     if (chainId !== mumbaiChainId && chainId !== localhostChainId) {
-      props.setNet(false);
+      setCorrectNetwork(false);
     } else {
-      props.setNet(true);
-    }
-  }
-
-  // Triggered by button to connect to wallet
-  async function connectToWallet() {
-    try {
-      if (!window.ethereum) {
-        console.log("Metamask not detected");
-        return;
-      }
-      let chainId = await window.ethereum.request({ method: "eth_chainId" });
-      console.log("Connected to chain:" + chainId);
-
-      if (chainId !== mumbaiChainId && chainId !== localhostChainId) {
-        alert("You are not connected to the Mumbai Testnet!");
-        return;
-      }
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      console.log("Found account", accounts[0]);
-      props.setAddr(accounts[0]);
-    } catch (error) {
-      console.log("Error connecting to metamask", error);
+      setCorrectNetwork(true);
     }
   }
 
@@ -66,16 +44,42 @@ export default function ConnectWallet(props) {
     checkCorrectNetwork();
   }, []);
 
-  return (
-    <button id="walletButton" onClick={connectToWallet}>
-      {props.addr !== "" && props.corrNet ? (
-        "Connected: " +
-        String(props.addr).substring(0, 6) +
+  return correctNetwork === false ? (
+    "Please connect to Mumbai testnet"
+  ) : connection.status === "connected" ? (
+    <div>
+      <button
+        id="walletButton"
+        onClick={() => {
+          disconnect();
+        }}
+      >
+        Disconnect
+      </button>
+      <br></br>
+      {connection.selfID.id}
+      <br></br>
+      {String(props.addr).substring(0, 6) +
         "..." +
-        String(props.addr).substring(38)
-      ) : (
-        <span>Connect Wallet</span>
-      )}
+        String(props.addr).substring(38)}
+    </div>
+  ) : "ethereum" in window ? (
+    <button
+      disabled={connection.status === "connecting"}
+      onClick={async () => {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        await connect(new EthereumAuthProvider(window.ethereum, accounts[0]));
+        props.setConn(true);
+      }}
+    >
+      Connect
     </button>
+  ) : (
+    <p>
+      An injected Ethereum provider such as{" "}
+      <a href="https://metamask.io/">MetaMask</a> is needed to authenticate.
+    </p>
   );
 }

@@ -4,18 +4,30 @@ import { ethers } from "ethers";
 import { nftContractAddress } from "../config.js";
 import NFT from "../NFT.json";
 
+const NFT_COUNT = 5;
+const PINATA_URL =
+  "https://gateway.pinata.cloud/ipfs/QmZTJ9wDPaBP8aFMNKQubuuTaAnqA747QxoktqPaxBTfMA/";
+const MUMBAI_URL = "https://mumbai.polygonscan.com/tx/";
+
 export default function Minter(props) {
+  function getContract() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const nftContract = new ethers.Contract(
+      nftContractAddress,
+      NFT.abi,
+      signer
+    );
+
+    return nftContract;
+  }
+
   async function mintNFT() {
     try {
-      const randomInt = Math.floor(Math.random() * 4) + 1;
-      const url = `https://gateway.pinata.cloud/ipfs/QmZTJ9wDPaBP8aFMNKQubuuTaAnqA747QxoktqPaxBTfMA/${randomInt}.json`;
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const nftContract = new ethers.Contract(
-        nftContractAddress,
-        NFT.abi,
-        signer
-      );
+      const nftContract = getContract();
+
+      const randomInt = Math.floor(Math.random() * NFT_COUNT) + 1;
+      const url = PINATA_URL + `${randomInt}.json`;
 
       let nftTx = await nftContract.createToken(url);
       console.log("Mining...", nftTx.hash);
@@ -23,7 +35,7 @@ export default function Minter(props) {
       await nftTx.wait();
 
       console.log(
-        `Mined! See transaction here: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
+        "Mined! See transaction here: " + MUMBAI_URL + `${nftTx.hash}`
       );
 
       loadMintedNFTs();
@@ -34,34 +46,23 @@ export default function Minter(props) {
 
   async function loadMintedNFTs() {
     try {
-      if (window.ethereum) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const nftContract = new ethers.Contract(
-          nftContractAddress,
-          NFT.abi,
-          signer
-        );
+      const nftContract = getContract();
 
-        let tokenIdsString = await nftContract.tokensOfOwner(props.addr);
-        let tokenIds = [];
-        tokenIdsString.forEach((str) => {
-          tokenIds.push(Number(str));
-        });
-        console.log(tokenIds);
-        let minted = [];
+      let tokenIdsString = await nftContract.tokensOfOwner(props.addr);
+      let tokenIds = [];
+      tokenIdsString.forEach((str) => {
+        tokenIds.push(Number(str));
+      });
 
-        for (let i = 0; i < tokenIds.length; i++) {
-          let tokenURI = await nftContract.tokenURI(tokenIds[i]);
-          let data = await axios.get(tokenURI);
-          // console.log(data);
-          minted.push(data.data.name);
-        }
-
-        props.updateNFTs(minted);
-      } else {
-        console.log("Ethereum object doesn't exist!");
+      let minted = [];
+      for (let i = 0; i < tokenIds.length; i++) {
+        let tokenURI = await nftContract.tokenURI(tokenIds[i]);
+        let data = await axios.get(tokenURI);
+        // console.log(data);
+        minted.push(data.data.name);
       }
+
+      props.updateNFTs(minted);
     } catch (error) {
       console.log(error);
     }
@@ -69,11 +70,7 @@ export default function Minter(props) {
 
   return (
     <div>
-      {props.addr !== "" && props.corrNet ? (
-        <button onClick={mintNFT}>Mint</button>
-      ) : (
-        <div>Please connect to Mumbai Testnet</div>
-      )}
+      {props.connected ? <button onClick={mintNFT}>Mint</button> : <div></div>}
     </div>
   );
 }

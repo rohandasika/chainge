@@ -5,19 +5,20 @@ import { useState } from "react";
 import ConnectWallet from "./components/ConnectWallet";
 import Minter from "./components/Minter";
 import MintedNFTs from "./components/MintedNFTs";
+import { Provider } from "@self.id/framework";
 
-export default function App() {
+export default function App({ children }) {
   const [mintedNFTs, setMintedNFTs] = useState([]);
   const [status, setStatus] = useState("");
   const [currentAccount, setCurrentAccount] = useState("");
-  const [correctNetwork, setCorrectNetwork] = useState(false);
+  const [connected, setConnected] = useState(false);
 
   async function setAccount(addr) {
     setCurrentAccount(addr);
   }
 
-  async function setNetwork(value) {
-    setCorrectNetwork(value);
+  async function getConnected(value) {
+    setConnected(value);
   }
 
   async function updateNFTs(nfts) {
@@ -26,23 +27,21 @@ export default function App() {
 
   return (
     <div className="Minter">
+      <Provider client={{ ceramic: "testnet-clay" }}>{children}</Provider>
       <div>
         <ConnectWallet
           addr={currentAccount}
-          corrNet={correctNetwork}
           setAddr={setAccount}
-          setNet={setNetwork}
+          setConn={getConnected}
         ></ConnectWallet>
 
         <Minter
           addr={currentAccount}
-          corrNet={correctNetwork}
+          connected={connected}
           updateNFTs={updateNFTs}
         ></Minter>
       </div>
-
       <br></br>
-
       <div>
         <MintedNFTs nfts={mintedNFTs}></MintedNFTs>
       </div>
