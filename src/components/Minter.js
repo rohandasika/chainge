@@ -2,7 +2,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 import { nftContractAddress } from "../config.js";
-import NFT from "../utils/NFT.json";
+import NFT from "../NFT.json";
 
 export default function Minter(props) {
   async function mintNFT() {
