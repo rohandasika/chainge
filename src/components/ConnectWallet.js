@@ -9,23 +9,6 @@ export default function ConnectWallet(props) {
   const [correctNetwork, setCorrectNetwork] = useState(false);
   const [connection, connect, disconnect] = useViewerConnection();
 
-  // Checks if wallet is connected
-  async function checkIfWalletConnected() {
-    if (window.ethereum) {
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-      if (accounts.length !== 0) {
-        console.log("found authorized account: ", accounts[0]);
-        props.setAddr(accounts[0]);
-      } else {
-        console.log("no authorized account found");
-      }
-    } else {
-      console.log("Metamask not detected");
-    }
-  }
-
   // Checks if wallet is connected to the correct network
   async function checkCorrectNetwork() {
     let chainId = await window.ethereum.request({ method: "eth_chainId" });
@@ -40,9 +23,15 @@ export default function ConnectWallet(props) {
 
   // Check if connected on load
   useEffect(() => {
-    checkIfWalletConnected();
     checkCorrectNetwork();
   }, []);
+
+  useEffect(() => {
+    if (connection.status === "connected") {
+      props.setConn(true);
+      props.setDID(connection.selfID.id);
+    }
+  }, [connection]);
 
   return correctNetwork === false ? (
     "Please connect to Mumbai testnet"
@@ -57,11 +46,11 @@ export default function ConnectWallet(props) {
         Disconnect
       </button>
       <br></br>
-      {connection.selfID.id}
-      <br></br>
-      {String(props.addr).substring(0, 6) +
+      {connection.selfID.id.slice(0, 10) +
         "..." +
-        String(props.addr).substring(38)}
+        connection.selfID.id.slice(65)}
+      <br></br>
+      {props.addr.slice(0, 6) + "..." + props.addr.slice(38)}
     </div>
   ) : "ethereum" in window ? (
     <button
@@ -71,7 +60,7 @@ export default function ConnectWallet(props) {
           method: "eth_requestAccounts",
         });
         await connect(new EthereumAuthProvider(window.ethereum, accounts[0]));
-        props.setConn(true);
+        props.setAddr(accounts[0]);
       }}
     >
       Connect
