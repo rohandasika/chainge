@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Rubik";
+  color: #254cdd;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.Minter {
+  max-width: 80vh;
+  max-height: 80vh;
+  padding: 60px 100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  font-size: 16px;
+  width: 100%;
+  border-color: rgba(4, 4, 5, 0.1);
+  line-height: 32px;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(4, 4, 5, 0.4);
+}
+
+button {
+  padding: 9px 16px;
+  max-height: 40px;
+  /*box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%);*/
+  border-color: #254cdd;
+  color: #254cdd;
+  background-color: white;
+  border-radius: 8px;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  margin-top: -1px;
+}
+
+#title {
+  padding-top: 32px;
+}
+
+.uploadFile {
+  border: 4px dashed rgba(4, 4, 5, 0.1);
+  border-radius: 16px;
+  text-align: center;
+  padding: 32px 60px;
+}
+
+#walletButton {
+  text-align: right;
+  float: right;
+  margin-bottom: 50px;
+  line-height: 16px;
+}
+/*
+#walletButton:focus {
+  outline:none;
+  border: none;
+}
+#walletButton:hover {
+  outline:none;
+  border :none;
+} */
+
+#mintButton {
+  margin-top: 40px;
+  background-color: #254cdd;
+  color: white;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;500&display=swap");
+
+main {
+  width: 640px;
+  margin: 0% auto;
+}
+
+h1 {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.5rem;
+}
+
+.table {
+  box-shadow: 0 2px 8px rgb(84 70 35 / 15%), 0 1px 3px rgb(84 70 35 / 15%);
+  border-radius: 4px;
+}
+
+.head,
+.item {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 20px;
+  font-family: "Outfit", sans-serif;
+  padding: 10px 20px;
+}
+
+.head {
+  border-radius: 4px 4px 0px 0px;
+  background: #2c2c2c;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.item {
+  font-weight: 300;
+}
+
+.item:nth-child(2n + 1) {
+  background: rgb(247, 247, 247, 0);
+}
+
+.item:nth-child(2n) {
+  background: rgb(247, 247, 247, 0.5);
+}
