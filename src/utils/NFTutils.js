@@ -36,7 +36,15 @@ export async function getAllNFTs(addr, updateNFTs) {
     }
 
     updateNFTs(minted);
+    // console.log(minted);
   } catch (error) {
     console.log(error);
   }
+}
+
+export function isNftVerified(token_id, verifiedNFTs) {
+  for (let i = 0; i < verifiedNFTs.length; i++)
+    if (token_id === parseInt(verifiedNFTs[i].nftID)) return true;
+
+  return false;
 }

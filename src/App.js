@@ -2,9 +2,12 @@ import "./App.css";
 
 import { useState } from "react";
 import { Provider } from "@self.id/framework";
+import { Routes, Route } from "react-router-dom";
 
 import MenuBar from "./components/MenuBar";
-import Body from "./components/Body";
+import MainPage from "./components/MainPage";
+import Friends from "./components/Friends";
+import Search from "./components/Search";
 
 import { aliases } from "./utils/constants";
 
@@ -41,16 +44,27 @@ export default function App({ children }) {
           setConn={getConnected}
           updateNFTs={updateNFTs}
         ></MenuBar>
+        <br></br>
+        <br></br>
 
         {connected && (
-          <Body
-            addr={currentAccount}
-            connected={connected}
-            mintedNFTs={mintedNFTs}
-            updateNFTs={updateNFTs}
-            verifiedNFTs={verifiedNFTs}
-            updateVerifiedNFTs={updateVerifiedNFTs}
-          ></Body>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  addr={currentAccount}
+                  connected={connected}
+                  mintedNFTs={mintedNFTs}
+                  updateNFTs={updateNFTs}
+                  verifiedNFTs={verifiedNFTs}
+                  updateVerifiedNFTs={updateVerifiedNFTs}
+                ></MainPage>
+              }
+            ></Route>
+            <Route path="friends" element={<Friends></Friends>}></Route>
+            <Route path="search" element={<Search></Search>}></Route>
+          </Routes>
         )}
       </Provider>
     </div>
