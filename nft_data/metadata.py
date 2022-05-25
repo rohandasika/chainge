@@ -17,6 +17,7 @@ def getAttribute(key, value):
 for i, item in enumerate(data):
     token = {
         "image": IMAGES_BASE_URL,
+        "token_id": i+1,
         "name": item["action"],
         "attributes": []
     }

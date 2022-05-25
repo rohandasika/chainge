@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+
 import { useViewerRecord, useViewerConnection } from "@self.id/framework";
 
 export default function UserProfile(props) {
@@ -7,11 +9,17 @@ export default function UserProfile(props) {
   // console.log(profile);
   return connection.status === "connected" ? (
     <div>
-      <h1 id="heading">hello {profile.content.name}</h1>
+      <Typography variant="h6">Hello, {profile.content.name}!</Typography>
+
+      <Typography variant="p">
+        {connection.selfID.id.slice(0, 10) +
+          "..." +
+          connection.selfID.id.slice(65)}
+        <br></br>
+        {props.addr.slice(0, 6) + "..." + props.addr.slice(38)}
+      </Typography>
     </div>
   ) : (
-    <div>
-      <p className="notConnected">Connect an Ethereum wallet to begin</p>
-    </div>
+    <div></div>
   );
 }

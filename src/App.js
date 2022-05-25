@@ -3,29 +3,17 @@ import "./App.css";
 import { useState } from "react";
 import { Provider } from "@self.id/framework";
 
-import ConnectWallet from "./components/ConnectWallet";
-import Minter from "./components/Minter";
-import MintedNFTs from "./components/MintedNFTs";
-import UserProfile from "./components/UserProfile";
+import MenuBar from "./components/MenuBar";
+import Body from "./components/Body";
 
-const aliases = {
-  definitions: {
-    basicProfile:
-      "kjzl6cwe1jw145cjbeko9kil8g9bxszjhyde21ob8epxuxkaon1izyqsu8wgcic",
-  },
-  schemas: {
-    BasicProfile:
-      "ceramic://k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",
-  },
-  tiles: {},
-};
+import { aliases } from "./utils/constants";
 
 export default function App({ children }) {
   const [mintedNFTs, setMintedNFTs] = useState([]);
+  const [verifiedNFTs, setVerifiedNFTs] = useState([]);
   const [status, setStatus] = useState("");
   const [currentAccount, setCurrentAccount] = useState("");
   const [connected, setConnected] = useState(false);
-  const [did, setDID] = useState("");
 
   async function setAccount(addr) {
     setCurrentAccount(addr);
@@ -39,33 +27,31 @@ export default function App({ children }) {
     setMintedNFTs(nfts);
   }
 
-  async function updateDID(did) {
-    setDID(did);
+  async function updateVerifiedNFTs(nfts) {
+    setVerifiedNFTs(nfts);
+    // console.log(nfts);
   }
 
   return (
-    <div className="Minter">
+    <div>
       <Provider client={{ ceramic: "testnet-clay", aliases }}>
-        {children}
-        <div>
-          <ConnectWallet
-            addr={currentAccount}
-            setAddr={setAccount}
-            setConn={getConnected}
-            setDID={updateDID}
-          ></ConnectWallet>
+        <MenuBar
+          addr={currentAccount}
+          setAddr={setAccount}
+          setConn={getConnected}
+          updateNFTs={updateNFTs}
+        ></MenuBar>
 
-          <Minter
+        {connected && (
+          <Body
             addr={currentAccount}
             connected={connected}
+            mintedNFTs={mintedNFTs}
             updateNFTs={updateNFTs}
-          ></Minter>
-        </div>
-        <br></br>
-
-        <MintedNFTs nfts={mintedNFTs}></MintedNFTs>
-
-        <UserProfile did={did}></UserProfile>
+            verifiedNFTs={verifiedNFTs}
+            updateVerifiedNFTs={updateVerifiedNFTs}
+          ></Body>
+        )}
       </Provider>
     </div>
   );

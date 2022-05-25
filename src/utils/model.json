@@ -1,0 +1,9 @@
+{
+  "definitions": {
+    "ChaingeVerification": "kjzl6cwe1jw1464skew763l3skk3rn8nh4szd81gpoic7x1epzq1ke42qyz4nnd"
+  },
+  "schemas": {
+    "ChaingeVerification": "ceramic://k3y52l7qbv1fry495920ecsm6e13fyrli2s0bkhu3twx8yixpp3uqabis0mt6pcsg"
+  },
+  "tiles": {}
+}
