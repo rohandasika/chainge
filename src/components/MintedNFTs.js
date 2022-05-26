@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useViewerConnection } from "@self.id/framework";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,8 +8,9 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import { useEffect } from "react";
+import { useViewerConnection } from "@self.id/framework";
 import { getAllNFTs, isNftVerified } from "../utils/NFTutils";
-
 import { OPENSEA_URL } from "../utils/constants";
 
 export default function MintedNFTs(props) {

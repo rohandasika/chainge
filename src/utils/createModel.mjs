@@ -1,4 +1,3 @@
-// import ChaingeVerification from "./ChaingeVerification.json" assert { type: "json" };
 import { writeFile } from "node:fs/promises";
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import { ModelManager } from "@glazed/devtools";

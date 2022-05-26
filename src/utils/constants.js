@@ -1,13 +1,15 @@
-export const nftContractAddress = "0xAF6DD90b4562BA12f3B1aeaae404a4709253DF14";
-
+export const NFT_COUNT = 5;
 export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 
-export const NFT_COUNT = 5;
+export const nftContractAddress = "0xAF6DD90b4562BA12f3B1aeaae404a4709253DF14";
+export const DEMO_ADDRESS = "0x148d59faf10b52063071eddf4aaf63a395f2d41c";
+
 export const PINATA_URL =
   "https://gateway.pinata.cloud/ipfs/QmSFB1nTnbBPWZ11tmcpetH2yDa5RGvE4QKvrh1aJs34eE/";
 export const MUMBAI_URL = "https://mumbai.polygonscan.com/tx/";
 export const OPENSEA_URL = `https://testnets.opensea.io/assets/mumbai/${nftContractAddress}/`;
+export const CYBERCONNECT_ENDPOINT = "https://api.cybertino.io/connect/";
 
 export const aliases = {
   definitions: {
@@ -25,6 +27,12 @@ export const aliases = {
   tiles: {},
 };
 
-export const CYBERCONNECT_ENDPOINT = "https://api.cybertino.io/connect/";
-
-export const DEMO_ADDRESS = "0x148d59faf10b52063071eddf4aaf63a395f2d41c";
+export const nullAction = {
+  nftAction: [
+    {
+      nftID: "0",
+      action: "",
+      date: "2000-01-01",
+    },
+  ],
+};

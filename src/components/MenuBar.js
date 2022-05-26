@@ -19,17 +19,13 @@ export default function MenuBar(props) {
             <UserProfile addr={props.addr}></UserProfile>
             <ButtonGroup variant="text" aria-label="text button group">
               <Link to="/">
-                <Button sx={{ color: "white", display: "block" }}>Home</Button>
+                <Button sx={{ color: "white" }}>Home</Button>
               </Link>
               <Link to="friends">
-                <Button sx={{ color: "white", display: "block" }}>
-                  Friends
-                </Button>
+                <Button sx={{ color: "white" }}>Friends</Button>
               </Link>
               <Link to="search">
-                <Button sx={{ color: "white", display: "block" }}>
-                  Search
-                </Button>
+                <Button sx={{ color: "white" }}>Search</Button>
               </Link>
             </ButtonGroup>
             <ConnectWallet

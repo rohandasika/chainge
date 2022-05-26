@@ -7,7 +7,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { useEffect } from "react";
-
 import { useViewerRecord } from "@self.id/framework";
 
 export default function VerifiedNFTs(props) {

@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 
 import { useState } from "react";
 import { useViewerRecord } from "@self.id/framework";
+import { nullAction } from "../utils/constants";
 
 export default function Verifier(props) {
   const [inputs, setInputs] = useState({});
@@ -40,20 +41,13 @@ export default function Verifier(props) {
         action: action,
         date: inputs.date,
       };
-      const nullAction = {
-        nftAction: [
-          {
-            nftID: "0",
-            action: "",
-            date: "2000-01-01",
-          },
-        ],
-      };
-      let updatedNFTs = updateVerifiedNFTs(nftCompleteAction);
 
+      // Use these when actually writing to Ceramic
+      let updatedNFTs = updateVerifiedNFTs(nftCompleteAction);
       await verifiedNFTsCeramic.set(updatedNFTs);
 
-      // console.log(verifiedNFTsCeramic);
+      // Use this when resetting Ceramic
+      // await verifiedNFTsCeramic.set(nullAction);
     } catch (error) {
       console.log("Error minting NFT", error);
     }

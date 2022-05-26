@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ethers } from "ethers";
 
-import { nftContractAddress } from "./constants";
 import NFT from "./NFT.json";
+import { nftContractAddress } from "./constants";
 
 export async function getNftContract() {
   const provider = new ethers.providers.Web3Provider(window.ethereum);

@@ -1,14 +1,12 @@
 import "./App.css";
-
-import { useState } from "react";
-import { Provider } from "@self.id/framework";
-import { Routes, Route } from "react-router-dom";
-
 import MenuBar from "./components/MenuBar";
 import MainPage from "./components/MainPage";
 import Friends from "./components/Friends";
 import Search from "./components/Search";
 
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Provider } from "@self.id/framework";
 import { aliases } from "./utils/constants";
 
 export default function App({ children }) {

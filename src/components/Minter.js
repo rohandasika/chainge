@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 
 import { getNftContract, getAllNFTs } from "../utils/NFTutils";
-
 import { NFT_COUNT, MUMBAI_URL, PINATA_URL } from "../utils/constants";
 
 export default function Minter(props) {

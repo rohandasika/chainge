@@ -2,7 +2,6 @@ import Button from "@mui/material/Button";
 
 import { useState, useEffect } from "react";
 import { EthereumAuthProvider, useViewerConnection } from "@self.id/framework";
-
 import { devChainId, mumbaiChainId } from "../utils/constants";
 
 const localhostChainId = `0x${Number(devChainId).toString(16)}`;
