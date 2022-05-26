@@ -63,7 +63,10 @@ export default function App({ children }) {
               }
             ></Route>
             <Route path="friends" element={<Friends></Friends>}></Route>
-            <Route path="search" element={<Search></Search>}></Route>
+            <Route
+              path="search"
+              element={<Search addr={currentAccount}></Search>}
+            ></Route>
           </Routes>
         )}
       </Provider>

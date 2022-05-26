@@ -40,10 +40,11 @@ export default function ConnectWallet(props) {
     await connect(new EthereumAuthProvider(window.ethereum, accounts[0]));
     props.setAddr(accounts[0]);
     props.setConn(true);
+    console.log(window.ethereum);
   }
 
   return correctNetwork === false ? (
-    "Please connect to Mumbai testnet"
+    "Please switch to Mumbai testnet"
   ) : connection.status === "connected" ? (
     <div>
       <Button variant="contained" onClick={clickDisconnect}>

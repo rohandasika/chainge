@@ -67,7 +67,7 @@ const variables = {
   // address: DEMO_ADDRESS,
 };
 
-export default function Friends() {
+export default function Friends(props) {
   const [identity, setIdentity] = useState([]);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function Friends() {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [props]);
 
   return (
     identity && (
@@ -110,12 +110,7 @@ export default function Friends() {
                   </TableHead>
                   <TableBody>
                     {identity.followers.list.map((follower, i) => (
-                      <TableRow
-                        key={i}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
+                      <TableRow key={i}>
                         <TableCell component="th" scope="row">
                           {follower.address}
                         </TableCell>
@@ -143,12 +138,7 @@ export default function Friends() {
                   </TableHead>
                   <TableBody>
                     {identity.followings.list.map((following, i) => (
-                      <TableRow
-                        key={i}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
+                      <TableRow key={i}>
                         <TableCell component="th" scope="row">
                           {following.address}
                         </TableCell>
