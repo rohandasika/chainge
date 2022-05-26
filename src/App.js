@@ -1,6 +1,6 @@
 import "./App.css";
 import MenuBar from "./components/MenuBar";
-import MainPage from "./components/MainPage";
+import Home from "./components/Home";
 import Friends from "./components/Friends";
 import Search from "./components/Search";
 
@@ -12,7 +12,7 @@ import { aliases } from "./utils/constants";
 export default function App({ children }) {
   const [mintedNFTs, setMintedNFTs] = useState([]);
   const [verifiedNFTs, setVerifiedNFTs] = useState([]);
-  const [status, setStatus] = useState("");
+  // const [status, setStatus] = useState("");
   const [currentAccount, setCurrentAccount] = useState("");
   const [connected, setConnected] = useState(false);
 
@@ -50,14 +50,14 @@ export default function App({ children }) {
             <Route
               path="/"
               element={
-                <MainPage
+                <Home
                   addr={currentAccount}
                   connected={connected}
                   mintedNFTs={mintedNFTs}
                   updateNFTs={updateNFTs}
                   verifiedNFTs={verifiedNFTs}
                   updateVerifiedNFTs={updateVerifiedNFTs}
-                ></MainPage>
+                ></Home>
               }
             ></Route>
             <Route path="friends" element={<Friends></Friends>}></Route>

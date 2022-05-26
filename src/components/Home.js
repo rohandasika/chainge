@@ -6,7 +6,7 @@ import MintedNFTs from "./MintedNFTs";
 import Verifier from "./Verifier";
 import VerifiedNFTs from "./VerifiedNFTs";
 
-export default function MainPage(props) {
+export default function Home(props) {
   return (
     <Container maxWidth="100%">
       <Grid
