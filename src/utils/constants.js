@@ -2,11 +2,15 @@ export const NFT_COUNT = 100;
 export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 
-export const nftContractAddress = "0x98338555AA02c7EE293a0D6E0CFeF99177d834dC";
+export const nftContractAddress = "0xE5eb7a6C5c73926825C38F263dBb5a447F72304E";
 export const DEMO_ADDRESS = "0x148d59faf10b52063071eddf4aaf63a395f2d41c";
 
-export const PINATA_URL =
-  "https://gateway.pinata.cloud/ipfs/QmSFB1nTnbBPWZ11tmcpetH2yDa5RGvE4QKvrh1aJs34eE/";
+export const IMAGE_URL =
+  "https://gateway.pinata.cloud/ipfs/QmYCrmBY6Wk2mn1Yq868QDzuVL2LSG9NvC7SykqyBSTTgh";
+
+export const CERAMIC_ENDPOINT =
+  "https://ceramic-private-clay.3boxlabs.com/api/v0/streams/";
+
 export const MUMBAI_URL = "https://mumbai.polygonscan.com/tx/";
 export const OPENSEA_URL = `https://testnets.opensea.io/assets/mumbai/${nftContractAddress}/`;
 export const CYBERCONNECT_ENDPOINT = "https://api.cybertino.io/connect/";

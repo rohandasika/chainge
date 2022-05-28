@@ -2,22 +2,19 @@ import Button from "@mui/material/Button";
 
 import {
   getNftContract,
+  createNftMetadata,
   getAllNFTs,
-  createNFT,
-  updateTokenMapping,
 } from "../utils/NFTutils";
-import { MUMBAI_URL } from "../utils/constants";
+import { MUMBAI_URL, CERAMIC_ENDPOINT } from "../utils/constants";
 
 export default function Minter(props) {
   async function mintNFT() {
     try {
       const nftContract = await getNftContract();
-      const [tokenId, NFT] = await createNFT();
 
-      // const url = NFT.id.toUrl() + "/content";
-      const url = `https://ceramic-private-clay.3boxlabs.com/api/v0/streams/${NFT.id}/content`;
+      const NftStream = await createNftMetadata();
 
-      await updateTokenMapping(tokenId, NFT.id.toString());
+      const url = CERAMIC_ENDPOINT + NftStream.id + "/content";
 
       let nftTx = await nftContract.createToken(url);
       console.log("Mining...", nftTx.hash);

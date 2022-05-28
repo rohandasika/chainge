@@ -11,14 +11,9 @@ contract NFT is ERC721Enumerable, ERC721URIStorage, ERC721Burnable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    uint256 public constant MAX_SUPPLY = 100;
-
     constructor() ERC721("Chainge Tokens", "CHAINGE") {}
 
     function createToken(string memory tokenURI) public returns (uint256) {
-        uint256 totalMinted = _tokenIds.current();
-        require((totalMinted + 1) <= MAX_SUPPLY, "NOT ENOUGH NFTS");
-
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
 

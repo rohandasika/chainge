@@ -29,7 +29,6 @@ export default function Verifier(props) {
     return { nftAction };
   }
 
-  // console.log(profile);
   async function verifyAction(event) {
     event.preventDefault();
     try {

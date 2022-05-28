@@ -11,7 +11,7 @@ import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 
 import NFT from "./NFT.json";
-import { nftContractAddress, NFT_COUNT, aliases } from "./constants";
+import { nftContractAddress, IMAGE_URL, aliases } from "./constants";
 import { good_deeds } from "./good_deeds.js";
 
 // Utility function to get the NFT contract
@@ -21,6 +21,7 @@ export async function getNftContract() {
   return new ethers.Contract(nftContractAddress, NFT.abi, signer);
 }
 
+// Utility function to create a Ceramic object
 async function instantiateCeramic() {
   // The key must be provided as an environment variable
   const key = fromString(
@@ -44,38 +45,82 @@ async function instantiateCeramic() {
   return [ceramic, model, dataStore];
 }
 
-export async function updateTokenMapping(token_id, streamID) {
-  const [ceramic, model, dataStore] = await instantiateCeramic();
+// Returns all the tokenIds owned by this address
+async function getAllTokensOfOwner(addr) {
+  const nftContract = await getNftContract();
+  let tokenIdsString = await nftContract.tokensOfOwner(addr);
+  let userTokens = [];
 
-  let tokenMap = await dataStore.get("tokenMapping");
-  // await dataStore.set("tokenMapping", {});
-
-  // we have to create if it doesn't exist yet
-  if (Object.keys(tokenMap).length === 0) {
-    const map = { tokens: [{ token_id: token_id, streamID: streamID }] };
-    await dataStore.set("tokenMapping", map);
-  } else {
-    const new_entry = { token_id: token_id, streamID: streamID };
-    tokenMap.tokens.push(new_entry);
-    await dataStore.set("tokenMapping", tokenMap);
+  for (let i = 0; i < tokenIdsString.length; i++) {
+    let tokenId = Number(tokenIdsString[i]);
+    let tokenURI = await nftContract.tokenURI(tokenId);
+    userTokens.push({ tokenId, tokenURI });
   }
+
+  return userTokens;
 }
 
-export async function createNFT() {
+export async function updateTokenMapping(addr, streamID) {
   const [ceramic, model, dataStore] = await instantiateCeramic();
 
-  const action = good_deeds[0];
-  const actionCount = good_deeds.length; // nbr of remaining actions
-  if (actionCount === 0) {
-    console.log("No more actions to create");
-    return;
+  const tokenIds = getAllTokensOfOwner(addr);
+
+  let existingMap = await dataStore.get("tokenMapping");
+  // await dataStore.set("tokenMapping", {});
+  let tokenMap = {
+    tokens: [],
+  };
+
+  // we have to create if it doesn't exist yet
+  if (Object.keys(existingMap).length === 0) {
+    const map = { tokens: [{ token_id: tokenIds[0], streamID: streamID }] };
+    tokenMap = map;
+  } else {
+    // loop over all tokenIds and recreate the mapping
+    for (let i = 0; i < tokenIds.length; i++) {
+      for (let j = 0; j < existingMap.tokens.length; j++) {
+        // if a match exists in the current map, then just load that again
+        if (existingMap.tokens[j].token_id === tokenIds[i]) {
+          tokenMap.tokens.push({
+            token_id: tokenIds[i],
+            stream_id: existingMap.tokens[j].stream_id,
+          });
+        }
+        // if match not found in current map, then create a new entry with new streamID
+        else {
+          tokenMap.tokens.push({
+            token_id: tokenIds[i],
+            stream_id: streamID,
+          });
+        }
+      }
+    }
   }
-  const idx = NFT_COUNT - actionCount + 1; // get the index of the action (total - remaining + 1)
+
+  console.log(tokenMap);
+
+  await dataStore.set("tokenMapping", tokenMap);
+
+  // we have to create if it doesn't exist yet
+  // if (Object.keys(tokenMap).length === 0) {
+  //   const map = { tokens: [{ token_id: token_id, streamID: streamID }] };
+  //   await dataStore.set("tokenMapping", map);
+  // } else {
+  //   const new_entry = { token_id: token_id, streamID: streamID };
+  //   tokenMap.tokens.push(new_entry);
+  //   await dataStore.set("tokenMapping", tokenMap);
+  // }
+}
+
+export async function createNftMetadata() {
+  const [ceramic, model, dataStore] = await instantiateCeramic();
+
+  // Get a random action from good_deeds
+  const action = good_deeds[Math.floor(Math.random() * good_deeds.length)];
+
   const metadata = {
-    token_id: idx,
     name: action,
-    image:
-      "https://gateway.pinata.cloud/ipfs/QmYCrmBY6Wk2mn1Yq868QDzuVL2LSG9NvC7SykqyBSTTgh",
+    image: IMAGE_URL,
     traits: [
       {
         trait_type: "times_done",
@@ -88,38 +133,28 @@ export async function createNFT() {
 
   const newNFT = await model.createTile("nftMetadata", metadata);
 
-  // delete first element of good_deeds
-  good_deeds.shift();
-
-  return [metadata.token_id, newNFT];
+  return newNFT;
 }
 
-// Utility function to get all NFTs that have been minted
+// Utility function to get all NFTs that have been minted for this user
 export async function getAllNFTs(addr, updateNFTs) {
   try {
-    const nftContract = await getNftContract();
     const [ceramic, model, dataStore] = await instantiateCeramic();
 
-    let tokenIdsString = await nftContract.tokensOfOwner(addr);
-    let tokenIds = [];
-    tokenIdsString.forEach((str) => {
-      tokenIds.push(Number(str));
-    });
-
     let minted = [];
-    let tokenMap = await dataStore.get("tokenMapping");
+    let tokenIds = await getAllTokensOfOwner(addr);
     for (let i = 0; i < tokenIds.length; i++) {
-      console.log(tokenMap[tokenIds[i]]);
+      const URI = tokenIds[i].tokenURI;
+      const streamID = URI.substring(URI.indexOf("k"), URI.indexOf("/content"));
+      const stream = StreamID.fromString(streamID);
+      const tile = await TileDocument.load(ceramic, stream);
+      const data = tile.content;
 
-      // const streamID = StreamID.fromString(tokenURI.substring(10));
-      // const tile = await TileDocument.load(ceramic, streamID);
-      // const data = tile.content;
-
-      // minted.push([
-      //   data.token_id,
-      //   data.name,
-      //   data.traits[0].value, // Times Done
-      // ]);
+      minted.push([
+        tokenIds[i].tokenId,
+        data.name,
+        data.traits[0].value, // Times Done
+      ]);
     }
 
     updateNFTs(minted);

@@ -1,4 +1,4 @@
-export let good_deeds = [
+export const good_deeds = [
   "Leave money on a vending machine for someone",
   "Bake cookies for the elderly",
   "Serve at a homeless shelter",
