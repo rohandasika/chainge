@@ -30,7 +30,6 @@ export default function App({ children }) {
 
   async function updateVerifiedNFTs(nfts) {
     setVerifiedNFTs(nfts);
-    // console.log(nfts);
   }
 
   return (
@@ -60,7 +59,10 @@ export default function App({ children }) {
                 ></Home>
               }
             ></Route>
-            <Route path="friends" element={<Friends></Friends>}></Route>
+            <Route
+              path="friends"
+              element={<Friends addr={currentAccount}></Friends>}
+            ></Route>
             <Route
               path="search"
               element={<Search addr={currentAccount}></Search>}

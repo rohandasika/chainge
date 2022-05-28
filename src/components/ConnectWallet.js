@@ -13,8 +13,6 @@ export default function ConnectWallet(props) {
   // Checks if wallet is connected to the correct network
   async function checkCorrectNetwork() {
     let chainId = await window.ethereum.request({ method: "eth_chainId" });
-    console.log("Connected to chain:" + chainId);
-
     if (chainId !== mumbaiChainId && chainId !== localhostChainId) {
       setCorrectNetwork(false);
     } else {
@@ -39,7 +37,6 @@ export default function ConnectWallet(props) {
     await connect(new EthereumAuthProvider(window.ethereum, accounts[0]));
     props.setAddr(accounts[0]);
     props.setConn(true);
-    console.log(window.ethereum);
   }
 
   return correctNetwork === false ? (

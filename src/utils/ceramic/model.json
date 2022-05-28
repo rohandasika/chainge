@@ -1,0 +1,11 @@
+{
+  "definitions": {
+    "ChaingeVerification": "kjzl6cwe1jw14860n9hhuzqezjdwu4uwp040npmjpxts607ptfjkyc2dzlfygn6",
+    "nftMetadata": "kjzl6cwe1jw148grbdpvsbnrt60m9og6bcnrx758nagpb4h9woyranz7e21ohto"
+  },
+  "schemas": {
+    "ChaingeVerification": "ceramic://k3y52l7qbv1frylxqi0rzcfzlxblkm0a6tt4hzgj58dnrmoxw36kgsl19ea972k8w",
+    "nftMetadata": "ceramic://k3y52l7qbv1frxmci0v7kvdms8sqitkdflgow6lvbutgczyu3pihyj5e4mfhmgv0g"
+  },
+  "tiles": {}
+}

@@ -14,33 +14,28 @@ export default function VerifiedNFTs(props) {
 
   useEffect(() => {
     if (verifiedCeramicNFTs.content) {
-      let nftAction = verifiedCeramicNFTs.content.nftAction;
-      props.updateVerifiedNFTs(nftAction);
+      let verifiedActions = verifiedCeramicNFTs.content.verifiedActions;
+      props.updateVerifiedNFTs(verifiedActions);
     }
   }, [props, verifiedCeramicNFTs.content]);
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Token ID</TableCell>
-            <TableCell align="right">Action</TableCell>
-            <TableCell align="right">Date Completed</TableCell>
+            <TableCell align="center">Action</TableCell>
+            <TableCell align="center">Date Completed</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.verifiedNFTs &&
             props.verifiedNFTs.map((nft, i) => (
-              <TableRow
-                key={i}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {nft.nftID}
-                </TableCell>
-                <TableCell align="right">{nft.action}</TableCell>
-                <TableCell align="right">{nft.date}</TableCell>
+              <TableRow key={i}>
+                <TableCell>{nft.token_id}</TableCell>
+                <TableCell align="center">{nft.action}</TableCell>
+                <TableCell align="center">{nft.date}</TableCell>
               </TableRow>
             ))}
         </TableBody>
