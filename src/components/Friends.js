@@ -61,14 +61,15 @@ export const GET_IDENTITY = gql`
   }
 `;
 
-// Query variables
-const variables = {
-  address: "0xF2532Fb284575f0cb97F77cEE0c9E19f26b4A20d",
-  // address: DEMO_ADDRESS,
-};
-
-export default function Friends() {
+export default function Friends(props) {
   const [identity, setIdentity] = useState([]);
+
+  // Query variables
+  const variables = {
+    // address: "0xF2532Fb284575f0cb97F77cEE0c9E19f26b4A20d",
+    // address: DEMO_ADDRESS,
+    address: props.addr,
+  };
 
   useEffect(() => {
     client

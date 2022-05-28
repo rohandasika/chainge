@@ -1,4 +1,3 @@
-export const NFT_COUNT = 100;
 export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 

@@ -15,10 +15,10 @@ export default function Verifier(props) {
     setInputs((values) => ({ ...values, [name]: value }));
   }
 
+  // Create a new verifiedActions obj that will be stored on Ceramic
   function updateVerifiedNFTs(newAction) {
     let currentlyOnCeramic = verifiedNFTsCeramic.content;
     let verifiedActions;
-    console.log(currentlyOnCeramic);
 
     if (currentlyOnCeramic === null) {
       verifiedActions = [newAction];
@@ -33,6 +33,8 @@ export default function Verifier(props) {
     return { verifiedActions };
   }
 
+  // Once an action is verified, update the times done, and update corresponding
+  // user's Ceramic stream as proof of verification
   async function verifyAction(event) {
     event.preventDefault();
 
@@ -42,22 +44,18 @@ export default function Verifier(props) {
       await updateTimesDone(props.addr, token_id);
       const tileData = await getTileDataFromTokenID(props.addr, token_id);
 
-      console.log(tileData);
-
       const newAction = {
         token_id: token_id,
         action: tileData.name,
         date: inputs.date,
       };
 
-      const nullVerifiedActions = { verifiedActions: [] };
-
-      // Use these when actually writing to Ceramic
       let updatedNFTs = updateVerifiedNFTs(newAction);
       console.log(updatedNFTs);
       await verifiedNFTsCeramic.set(updatedNFTs);
 
       // Use this when resetting Ceramic
+      // const nullVerifiedActions = { verifiedActions: [] };
       // await verifiedNFTsCeramic.set(nullVerifiedActions);
     } catch (error) {
       console.log("Error minting NFT", error);

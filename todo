@@ -20,6 +20,6 @@ When verified, use token_id to find that nft's stream_id and then increase the c
 5/28
 
 - DONE inside getAllNFTs() make sure that token ids are being used to get streams of owned NFTs
-- increment times done when verified
+- DONE increment times done when verified
 - check caip-10 linkages for finding friends and seeing what they've done and verified
 - cleanup ceramic streams and issue new ones

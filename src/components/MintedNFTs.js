@@ -24,25 +24,22 @@ export default function MintedNFTs(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Token ID</TableCell>
-            <TableCell align="right">Action</TableCell>
-            <TableCell align="right">Times Completed</TableCell>
+            <TableCell align="center">Action</TableCell>
+            <TableCell align="center">Times Completed</TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           {props.nfts.map((nft, i) => (
-            <TableRow
-              key={i}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {nft[0]}
-              </TableCell>
-              <TableCell align="right">{nft[1]}</TableCell>
-              <TableCell align="right">{nft[2]}</TableCell>
+            <TableRow key={i}>
+              <TableCell>{nft[0]}</TableCell>
+              <TableCell align="center">{nft[1]}</TableCell>
+              <TableCell align="center">{nft[2]}</TableCell>
+
               {isNftVerified(nft[0], props.verifiedNFTs) && (
                 <TableCell padding="checkbox">
                   <IconButton href={OPENSEA_URL + nft[0]} target="_blank">

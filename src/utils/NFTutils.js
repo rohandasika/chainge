@@ -64,11 +64,13 @@ async function getAllTokensOfOwner(addr) {
   return userTokens;
 }
 
+// Given a token URI,will find the streamID and return the Stream object
 function getStreamFromTokenURI(URI) {
   const streamID = URI.substring(URI.indexOf("k"), URI.indexOf("/content"));
   return StreamID.fromString(streamID);
 }
 
+// Given a token ID, will return the stream Obj of the token
 async function getStreamFromTokenID(addr, tokenId) {
   let tokenIds = await getAllTokensOfOwner(addr);
 
@@ -80,6 +82,7 @@ async function getStreamFromTokenID(addr, tokenId) {
   }
 }
 
+// Given a token ID, will return the data stored on the tile
 export async function getTileDataFromTokenID(addr, tokenId) {
   const [ceramic, model, dataStore] = await instantiateCeramic();
 
@@ -88,6 +91,7 @@ export async function getTileDataFromTokenID(addr, tokenId) {
   return tile.content;
 }
 
+// On minting, generate NFT metadata and stores in a Ceramic tile doc
 export async function createNftMetadata() {
   const [ceramic, model, dataStore] = await instantiateCeramic();
 
@@ -112,7 +116,7 @@ export async function createNftMetadata() {
   return newNFT;
 }
 
-// Utility function to get all NFTs that have been minted for this user
+// Gets all NFTs that have been minted for this user
 export async function getAllNFTs(addr, updateNFTs) {
   try {
     const [ceramic, model, dataStore] = await instantiateCeramic();
@@ -139,6 +143,7 @@ export async function getAllNFTs(addr, updateNFTs) {
   }
 }
 
+// Updates the number of times an action has been done when verified
 export async function updateTimesDone(addr, token_id) {
   try {
     const [ceramic, model, dataStore] = await instantiateCeramic();

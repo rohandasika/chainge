@@ -6,11 +6,7 @@ import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 
-import {
-  chaingeVerificationSchema,
-  nftMetadataSchema,
-  tokenMappingSchema,
-} from "./schemas.mjs";
+import { chaingeVerificationSchema, nftMetadataSchema } from "./schemas.mjs";
 
 // run glaze:did create and get the outputted seed
 const key = fromString(
@@ -39,10 +35,6 @@ const nftMetadataSchemaID = await manager.createSchema(
   "nftMetadata",
   nftMetadataSchema
 );
-const tokenMappingSchemaID = await manager.createSchema(
-  "tokenMapping",
-  tokenMappingSchema
-);
 
 // Create definitions using schema IDs
 await manager.createDefinition("ChaingeVerification", {
@@ -54,11 +46,6 @@ await manager.createDefinition("nftMetadata", {
   name: "NFT Metadata",
   description: "Metadata for NFTs",
   schema: manager.getSchemaURL(nftMetadataSchemaID),
-});
-await manager.createDefinition("tokenMapping", {
-  name: "Token Mapping",
-  description: "Mapping of token IDs to respective NFTs metadata",
-  schema: manager.getSchemaURL(tokenMappingSchemaID),
 });
 
 // Deploy the data models from the ModelManager
