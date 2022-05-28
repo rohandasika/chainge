@@ -10,9 +10,13 @@ import { Ed25519Provider } from "key-did-provider-ed25519";
 import { getResolver } from "key-did-resolver";
 import { fromString } from "uint8arrays";
 
+import {
+  nftContractAddress,
+  IMAGE_URL,
+  aliases,
+  good_deeds,
+} from "./constants";
 import NFT from "./NFT.json";
-import { nftContractAddress, IMAGE_URL, aliases } from "./constants";
-import { good_deeds } from "./good_deeds.js";
 
 // Utility function to get the NFT contract
 export async function getNftContract() {
@@ -60,56 +64,28 @@ async function getAllTokensOfOwner(addr) {
   return userTokens;
 }
 
-export async function updateTokenMapping(addr, streamID) {
-  const [ceramic, model, dataStore] = await instantiateCeramic();
+function getStreamFromTokenURI(URI) {
+  const streamID = URI.substring(URI.indexOf("k"), URI.indexOf("/content"));
+  return StreamID.fromString(streamID);
+}
 
-  const tokenIds = getAllTokensOfOwner(addr);
+async function getStreamFromTokenID(addr, tokenId) {
+  let tokenIds = await getAllTokensOfOwner(addr);
 
-  let existingMap = await dataStore.get("tokenMapping");
-  // await dataStore.set("tokenMapping", {});
-  let tokenMap = {
-    tokens: [],
-  };
-
-  // we have to create if it doesn't exist yet
-  if (Object.keys(existingMap).length === 0) {
-    const map = { tokens: [{ token_id: tokenIds[0], streamID: streamID }] };
-    tokenMap = map;
-  } else {
-    // loop over all tokenIds and recreate the mapping
-    for (let i = 0; i < tokenIds.length; i++) {
-      for (let j = 0; j < existingMap.tokens.length; j++) {
-        // if a match exists in the current map, then just load that again
-        if (existingMap.tokens[j].token_id === tokenIds[i]) {
-          tokenMap.tokens.push({
-            token_id: tokenIds[i],
-            stream_id: existingMap.tokens[j].stream_id,
-          });
-        }
-        // if match not found in current map, then create a new entry with new streamID
-        else {
-          tokenMap.tokens.push({
-            token_id: tokenIds[i],
-            stream_id: streamID,
-          });
-        }
-      }
+  for (let i = 0; i < tokenIds.length; i++) {
+    let token = tokenIds[i];
+    if (token.tokenId === tokenId) {
+      return getStreamFromTokenURI(token.tokenURI);
     }
   }
+}
 
-  console.log(tokenMap);
+export async function getTileDataFromTokenID(addr, tokenId) {
+  const [ceramic, model, dataStore] = await instantiateCeramic();
 
-  await dataStore.set("tokenMapping", tokenMap);
-
-  // we have to create if it doesn't exist yet
-  // if (Object.keys(tokenMap).length === 0) {
-  //   const map = { tokens: [{ token_id: token_id, streamID: streamID }] };
-  //   await dataStore.set("tokenMapping", map);
-  // } else {
-  //   const new_entry = { token_id: token_id, streamID: streamID };
-  //   tokenMap.tokens.push(new_entry);
-  //   await dataStore.set("tokenMapping", tokenMap);
-  // }
+  const stream = await getStreamFromTokenID(addr, tokenId);
+  const tile = await TileDocument.load(ceramic, stream);
+  return tile.content;
 }
 
 export async function createNftMetadata() {
@@ -143,10 +119,10 @@ export async function getAllNFTs(addr, updateNFTs) {
 
     let minted = [];
     let tokenIds = await getAllTokensOfOwner(addr);
+
     for (let i = 0; i < tokenIds.length; i++) {
       const URI = tokenIds[i].tokenURI;
-      const streamID = URI.substring(URI.indexOf("k"), URI.indexOf("/content"));
-      const stream = StreamID.fromString(streamID);
+      const stream = getStreamFromTokenURI(URI);
       const tile = await TileDocument.load(ceramic, stream);
       const data = tile.content;
 
@@ -163,10 +139,35 @@ export async function getAllNFTs(addr, updateNFTs) {
   }
 }
 
+export async function updateTimesDone(addr, token_id) {
+  try {
+    const [ceramic, model, dataStore] = await instantiateCeramic();
+
+    const stream = await getStreamFromTokenID(addr, token_id);
+    console.log("updated NFT stream: " + stream.toString());
+    const tile = await TileDocument.load(ceramic, stream);
+    const data = tile.content;
+
+    const newData = {
+      name: data.name,
+      image: data.image,
+      traits: [
+        {
+          trait_type: "times_done",
+          value: data.traits[0].value + 1,
+        },
+      ],
+    };
+
+    tile.update(newData);
+  } catch (error) {
+    console.log(error);
+  }
+}
 // Check token_id against verified list to see if NFT has been verified
 export function isNftVerified(token_id, verifiedNFTs) {
   for (let i = 0; i < verifiedNFTs.length; i++)
-    if (token_id === parseInt(verifiedNFTs[i].nftID)) return true;
+    if (token_id === parseInt(verifiedNFTs[i].token_id)) return true;
 
   return false;
 }

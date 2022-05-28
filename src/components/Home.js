@@ -31,12 +31,14 @@ export default function Home(props) {
         <Grid item xs>
           <h1>Verify completed actions</h1>
           <Verifier
+            addr={props.addr}
             mintedNFTs={props.mintedNFTs}
             verifiedNFTs={props.verifiedNFTs}
             updateVerifiedNFTs={props.updateVerifiedNFTs}
           ></Verifier>
 
           <VerifiedNFTs
+            addr={props.addr}
             verifiedNFTs={props.verifiedNFTs}
             updateVerifiedNFTs={props.updateVerifiedNFTs}
           ></VerifiedNFTs>

@@ -30,39 +30,18 @@ export const nftMetadataSchema = {
   },
 };
 
-export const tokenMappingSchema = {
-  $schema: "http://json-schema.org/draft-07/schema#",
-  type: "object",
-  properties: {
-    tokens: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          token_id: {
-            type: "number",
-          },
-          nft_streamID: {
-            type: "string",
-          },
-        },
-      },
-    },
-  },
-};
-
 // NFT verification model to track when a user has completed the task
 export const chaingeVerificationSchema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   type: "object",
   title: "ChaingeVerification",
   properties: {
-    nftAction: {
+    verifiedActions: {
       type: "array",
       items: {
         type: "object",
         properties: {
-          nftID: {
+          token_id: {
             type: "number",
             default: "",
           },

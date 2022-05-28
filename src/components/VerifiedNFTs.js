@@ -14,8 +14,8 @@ export default function VerifiedNFTs(props) {
 
   useEffect(() => {
     if (verifiedCeramicNFTs.content) {
-      let nftAction = verifiedCeramicNFTs.content.nftAction;
-      props.updateVerifiedNFTs(nftAction);
+      let verifiedActions = verifiedCeramicNFTs.content.verifiedActions;
+      props.updateVerifiedNFTs(verifiedActions);
     }
   }, [props, verifiedCeramicNFTs.content]);
 
@@ -36,9 +36,7 @@ export default function VerifiedNFTs(props) {
                 key={i}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {nft.nftID}
-                </TableCell>
+                <TableCell>{nft.token_id}</TableCell>
                 <TableCell align="right">{nft.action}</TableCell>
                 <TableCell align="right">{nft.date}</TableCell>
               </TableRow>
