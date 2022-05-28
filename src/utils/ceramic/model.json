@@ -1,0 +1,13 @@
+{
+  "definitions": {
+    "ChaingeVerification": "kjzl6cwe1jw149i2uolxay3qh3cppyjcnxa85e0f7sj83jpd07hzn1l94gebuqg",
+    "nftMetadata": "kjzl6cwe1jw149ehazdivtxtfguw8l1bc413l5dxrjqpyj7ctbaxe3l1z7nw9jv",
+    "tokenMapping": "kjzl6cwe1jw146buawkyay1geayt1nssly7klq3r4weu0oom0x0xxv43o3pw3a4"
+  },
+  "schemas": {
+    "ChaingeVerification": "ceramic://k3y52l7qbv1fryk5gqmhht52e3zqr1alxnhz1n0tyep5nqtyjvuc7cw52f811uha8",
+    "nftMetadata": "ceramic://k3y52l7qbv1frxr84eqfu3gxinrkxchl9mjturzyohslfxpugwautp8ibjxnv50qo",
+    "tokenMapping": "ceramic://k3y52l7qbv1fry9fid2d03n2r9fa7sxex35ym8hf7bn9l01tfkbctmatjw6nrd6o0"
+  },
+  "tiles": {}
+}

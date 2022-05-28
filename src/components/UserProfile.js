@@ -6,7 +6,6 @@ export default function UserProfile(props) {
   const profile = useViewerRecord("basicProfile");
   const [connection] = useViewerConnection();
 
-  // console.log(profile);
   return connection.status === "connected" ? (
     <div>
       <Typography variant="h6">Hello, {profile.content.name}!</Typography>

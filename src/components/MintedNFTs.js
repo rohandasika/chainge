@@ -42,7 +42,7 @@ export default function MintedNFTs(props) {
                 {nft[0]}
               </TableCell>
               <TableCell align="right">{nft[1]}</TableCell>
-              <TableCell align="right">{nft[3]}</TableCell>
+              <TableCell align="right">{nft[2]}</TableCell>
               {isNftVerified(nft[0], props.verifiedNFTs) && (
                 <TableCell padding="checkbox">
                   <IconButton href={OPENSEA_URL + nft[0]} target="_blank">

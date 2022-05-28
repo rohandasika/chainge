@@ -30,7 +30,6 @@ export default function App({ children }) {
 
   async function updateVerifiedNFTs(nfts) {
     setVerifiedNFTs(nfts);
-    // console.log(nfts);
   }
 
   return (
