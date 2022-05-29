@@ -16,6 +16,7 @@ import { OPENSEA_URL } from "../utils/constants";
 export default function MintedNFTs(props) {
   const [connection] = useViewerConnection();
 
+  // Continuously fetch and update the NFT list in the background
   useEffect(() => {
     if (connection.status === "connected") {
       getAllNFTs(props.addr, props.updateNFTs);

@@ -7,18 +7,17 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { useEffect } from "react";
-import { useViewerRecord } from "@self.id/framework";
+import { usePublicRecord } from "@self.id/framework";
 
 export default function VerifiedNFTs(props) {
-  const verifiedCeramicNFTs = useViewerRecord("ChaingeVerification");
+  const viewingNFTs = usePublicRecord("ChaingeVerification", props.did);
 
   useEffect(() => {
-    if (verifiedCeramicNFTs.content) {
-      console.log(verifiedCeramicNFTs.content);
-      let verifiedActions = verifiedCeramicNFTs.content.verifiedActions;
-      props.updateVerifiedNFTs(verifiedActions);
+    if (viewingNFTs.content) {
+      let verifiedActions = viewingNFTs.content.verifiedActions;
+      props.updateSearchVerifiedNFTs(verifiedActions);
     }
-  }, [props, verifiedCeramicNFTs.content]);
+  }, [props, viewingNFTs.content]);
 
   return (
     <TableContainer component={Paper}>
@@ -31,8 +30,9 @@ export default function VerifiedNFTs(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.verifiedNFTs &&
-            props.verifiedNFTs.map((nft, i) => (
+          {props.did &&
+            props.searchVerifiedNFTs &&
+            props.searchVerifiedNFTs.map((nft, i) => (
               <TableRow key={i}>
                 <TableCell>{nft.token_id}</TableCell>
                 <TableCell align="center">{nft.action}</TableCell>

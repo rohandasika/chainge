@@ -2,7 +2,6 @@ export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 
 export const nftContractAddress = "0xE5eb7a6C5c73926825C38F263dBb5a447F72304E";
-export const DEMO_ADDRESS = "0x148d59faf10b52063071eddf4aaf63a395f2d41c";
 
 export const IMAGE_URL =
   "https://gateway.pinata.cloud/ipfs/QmYCrmBY6Wk2mn1Yq868QDzuVL2LSG9NvC7SykqyBSTTgh";

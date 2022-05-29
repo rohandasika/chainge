@@ -1,13 +1,14 @@
 import "./App.css";
-import MenuBar from "./components/MenuBar";
-import Home from "./components/Home";
-import Friends from "./components/Friends";
-import Search from "./components/Search";
 
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Provider } from "@self.id/framework";
 import { aliases } from "./utils/constants";
+
+import MenuBar from "./components/MenuBar";
+import Home from "./components/Home";
+import Friends from "./components/Friends";
+import Search from "./components/Search";
 
 export default function App({ children }) {
   const [mintedNFTs, setMintedNFTs] = useState([]);

@@ -9,14 +9,16 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 import { useEffect, useState } from "react";
-import { DEMO_ADDRESS, CYBERCONNECT_ENDPOINT } from "../utils/constants";
+import { CYBERCONNECT_ENDPOINT } from "../utils/constants";
 import { GraphQLClient, gql } from "graphql-request";
+
+import FollowButton from "./FollowButton";
 
 // Initialize the GraphQL Client
 const client = new GraphQLClient(CYBERCONNECT_ENDPOINT);
 
 // Query to get all types of followers via CyberConnect API
-export const GET_IDENTITY = gql`
+const GET_IDENTITY = gql`
   query ($address: String!) {
     identity(address: $address, network: ETH) {
       address
@@ -66,8 +68,6 @@ export default function Friends(props) {
 
   // Query variables
   const variables = {
-    // address: "0xF2532Fb284575f0cb97F77cEE0c9E19f26b4A20d",
-    // address: DEMO_ADDRESS,
     address: props.addr,
   };
 
@@ -85,6 +85,9 @@ export default function Friends(props) {
   return (
     identity && (
       <Container>
+        <Container align="center">
+          <FollowButton></FollowButton>
+        </Container>
         <Grid
           container
           direction="row"
