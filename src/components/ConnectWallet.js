@@ -55,6 +55,31 @@ export default function ConnectWallet(props) {
     console.log(accountLink);
   }
 
+  // to use if accidentally I link a 2nd wallet to the same DID
+  async function unlinkCurrentAddress() {
+    // First, we need to create an EthereumAuthProvider with the account currently selected
+    // The following assumes there is an injected `window.ethereum` provider
+    const addresses = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const authProvider = new EthereumAuthProvider(
+      window.ethereum,
+      addresses[0]
+    );
+
+    // Retrieve the CAIP-10 account from the EthereumAuthProvider instance
+    const accountId = await authProvider.accountId();
+
+    // Load the account link based on the account ID
+    const accountLink = await Caip10Link.fromAccount(
+      ceramic,
+      accountId.toString()
+    );
+
+    // Finally, unlink the DID from the account using the EthereumAuthProvider instance
+    await accountLink.clearDid(authProvider);
+  }
+
   // Connect/discoonect wallet
   async function clickDisconnect() {
     disconnect();

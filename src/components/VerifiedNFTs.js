@@ -14,7 +14,7 @@ export default function VerifiedNFTs(props) {
 
   useEffect(() => {
     if (verifiedCeramicNFTs.content) {
-      console.log(verifiedCeramicNFTs.content);
+      // console.log(verifiedCeramicNFTs.content);
       let verifiedActions = verifiedCeramicNFTs.content.verifiedActions;
       props.updateVerifiedNFTs(verifiedActions);
     }

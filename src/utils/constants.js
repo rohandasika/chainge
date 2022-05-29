@@ -1,7 +1,7 @@
 export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 
-export const nftContractAddress = "0xE5eb7a6C5c73926825C38F263dBb5a447F72304E";
+export const nftContractAddress = "0x8d64155F24674067ea09cbAB74c4ff99E220e3D3";
 
 export const IMAGE_URL =
   "https://gateway.pinata.cloud/ipfs/QmYCrmBY6Wk2mn1Yq868QDzuVL2LSG9NvC7SykqyBSTTgh";
@@ -18,17 +18,17 @@ export const aliases = {
     basicProfile:
       "kjzl6cwe1jw145cjbeko9kil8g9bxszjhyde21ob8epxuxkaon1izyqsu8wgcic",
     ChaingeVerification:
-      "kjzl6cwe1jw14860n9hhuzqezjdwu4uwp040npmjpxts607ptfjkyc2dzlfygn6",
+      "kjzl6cwe1jw149yg1kh07jat9lmwnxwinq1v91hmf0ej6zhapqdr6h8lcd422zh",
     nftMetadata:
-      "kjzl6cwe1jw148grbdpvsbnrt60m9og6bcnrx758nagpb4h9woyranz7e21ohto",
+      "kjzl6cwe1jw148633an7xz9293ds38noy3io4qlpv7jvntrwrdabmx6urz8rc73",
   },
   schemas: {
     BasicProfile:
       "ceramic://k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",
     ChaingeVerification:
-      "ceramic://k3y52l7qbv1frylxqi0rzcfzlxblkm0a6tt4hzgj58dnrmoxw36kgsl19ea972k8w",
+      "ceramic://k3y52l7qbv1fryqcc7qnt44bnlyt4vfsyuy49yjj06zjdpuelbvmt4i4cldtx6n7k",
     nftMetadata:
-      "ceramic://k3y52l7qbv1frxmci0v7kvdms8sqitkdflgow6lvbutgczyu3pihyj5e4mfhmgv0g",
+      "ceramic://k3y52l7qbv1fryc2cdxqgi70zvgse4ijn2lke0w1pamdtgkwlfqqbm7mtje45a1a8",
   },
   tiles: {},
 };
