@@ -16,7 +16,7 @@ import {
   aliases,
   good_deeds,
 } from "./constants";
-import NFT from "./NFT.json";
+import NFT from "../contracts/NFT.json";
 
 // Utility function to get the NFT contract
 export async function getNftContract() {

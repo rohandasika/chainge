@@ -1,4 +1,3 @@
-import "./index.css";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import React from "react";
