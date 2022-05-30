@@ -114,10 +114,10 @@ Download all dependencies:
 
 ```
 cd chainge
-// From the root directory
+// From the root directory (for Truffle and smart contracts)
 npm install
 
-// From the client directory (for the frontend)
+// From the client directory (for React app)
 cd client
 npm install
 ```
