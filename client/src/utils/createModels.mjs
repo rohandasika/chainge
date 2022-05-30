@@ -109,4 +109,4 @@ await manager.createDefinition("nftMetadata", {
 
 // Deploy the data models from the ModelManager
 const model = await manager.deploy();
-await writeFile("./model.json", JSON.stringify(model));
+await writeFile("./dataModels.json", JSON.stringify(model));
