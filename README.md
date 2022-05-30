@@ -1,4 +1,4 @@
-<img src="chainge-logos.jpeg" width=400 align="right"/>
+<img src="chainge-logos.jpeg" width=200 align="right"/>
 
 # Chainge: the chain of change
 
