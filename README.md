@@ -31,9 +31,7 @@ This project was conceptualized and built during the [EthShanghai 2022](https://
 
 ## How it works
 
-https://www.loom.com/share/aaa03e31fbe944a28eaf6c3a2160e8ef
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/aaa03e31fbe944a28eaf6c3a2160e8ef" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+> [Video Demo](https://www.loom.com/share/aaa03e31fbe944a28eaf6c3a2160e8ef)
 
 ### NFT metadata
 
