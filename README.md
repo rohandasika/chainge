@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img  src="chainge-logos.jpeg"  align="right"  />
 
-## Available Scripts
+# Chainge: the chain of change
 
-In the project directory, you can run:
+Chainge is a web3 app that empowers users to create change around themselves and to encourage their communities to do the same. Users can mint an NFT which contains an "act of kindness" that they must do and continue the chain by transferring the token to their friends. This project was built for the EthShanghai 2022 hackathon.
 
-### `yarn start`
+## Contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [How it Works](#how-it-works)
+- [Technologies Used](#tech-used)
+- [Bounties](#bounties)
+- [Setup Instructions](#setup-instructions)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### How it Works
 
-### `yarn test`
+### Technologies Used
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Network: [Polygon Mumbai](https://polygon.technology/)
+- Smart contract development: Truffle
+- RPC endpoints: Infura
+- Front-end hosting and NFT image storage: Arweave
+- Social connections: CyberConnect
+- User profiles & Dynamic NFT metadata: Ceramic
+- Front-end library: Create React App
+- UI library: Material UI React
 
-### `yarn build`
+### Bounties
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Bounty 1: [BUIDL For Social Good On Web3 With Infura And Truffle with a Layer 2 Solution](https://gitcoin.co/issue/28876)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+text
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Bounty 2: [Build Best Social Dapps With CyberConnect](https://gitcoin.co/issue/28881)
 
-### `yarn eject`
+text
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Bounty 3: [Build A DApp Using Arweave](https://gitcoin.co/issue/28889)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The [image](https://ugnie2vqerzywroilo3dk4lerfv2xxidwfxxy2w5koozrtkwhq.arweave.net/oZqCarAkc4tFyFu2NXFki_Wur3QOxb3xq3VOdmM1WPE) for each NFT that is minted is stored on Arweave, using ArDrive. Further, using `arkb` and `bundlr`, the frontend of the app is deployed to the permaweb 🐘 as well. I would have used Arweave to host _all_ the NFT metadata, but since the times that an action has been completed must be incremented on every verification, I chose to go with Ceramic for the dynamic NFT metadata.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Bounty 4: [Polygon Track 3 (Open Track)](https://gitcoin.co/issue/28870)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Chainge is built and tested fully on the Polygon Mumbai test network. Since this is an application in which we want the tokens to be frequently transferred between people, it has to be deployed on a fast network with low fees.
