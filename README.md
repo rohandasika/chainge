@@ -1,8 +1,9 @@
+<img src="chainge-logos.jpeg" width=250 align="right"/>
+
 # Chainge: the chain of change
 
 Chainge is a web3 dApp that empowers users to create change around themselves and to encourage their communities to do the same. Users can mint an NFT containing an "act of kindness" which they must do and then continue the chain by transferring the token to their friends. This project was conceptualized and built for the [EthShanghai 2022](https://hackathon.ethshanghai.org/) hackathon.
 
-<img src="chainge-logos.jpeg" | width=100/>
 
 ## Contents
 
