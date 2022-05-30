@@ -2,11 +2,10 @@ import Button from "@mui/material/Button";
 
 import { useState, useEffect } from "react";
 import { EthereumAuthProvider, useViewerConnection } from "@self.id/framework";
-import { devChainId, mumbaiChainId } from "../utils/constants";
+import { mumbaiChainId } from "../utils/constants";
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import { Caip10Link } from "@ceramicnetwork/stream-caip10-link";
 
-const localhostChainId = `0x${Number(devChainId).toString(16)}`;
 const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com");
 
 export default function ConnectWallet(props) {
@@ -16,7 +15,7 @@ export default function ConnectWallet(props) {
   // Checks if wallet is connected to the correct network
   async function checkCorrectNetwork() {
     let chainId = await window.ethereum.request({ method: "eth_chainId" });
-    if (chainId !== mumbaiChainId && chainId !== localhostChainId) {
+    if (chainId !== mumbaiChainId) {
       setCorrectNetwork(false);
     } else {
       setCorrectNetwork(true);

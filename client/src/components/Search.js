@@ -12,7 +12,6 @@ import OthersVerifiedNFTs from "./OthersVerifiedNFTs";
 
 export default function Search() {
   const [inputs, setInputs] = useState({});
-  const [status, setStatus] = useState("");
   const [did, setDID] = useState("");
   const [searchMintedNFTs, setSearchMintedNFTs] = useState([]);
   const [searchVerifiedNFTs, setSearchVerifiedNFTs] = useState([]);
@@ -29,6 +28,7 @@ export default function Search() {
     setSearchVerifiedNFTs(nfts);
   }
 
+  // Given an address, get the CAIP-10 link
   async function getCaip10Link() {
     const accountID = inputs.toAddr + "@eip155:80001";
     const link = await Caip10Link.fromAccount(ceramic, accountID);
