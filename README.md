@@ -1,8 +1,8 @@
-<img  src="chainge-logos.jpeg"  align="right"  />
-
 # Chainge: the chain of change
 
 Chainge is a web3 app that empowers users to create change around themselves and to encourage their communities to do the same. Users can mint an NFT which contains an "act of kindness" that they must do and continue the chain by transferring the token to their friends. This project was built for the EthShanghai 2022 hackathon.
+
+<img  src="chainge-logos.jpeg" />
 
 ## Contents
 
