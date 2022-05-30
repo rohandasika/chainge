@@ -1,10 +1,10 @@
 export const mumbaiChainId = "0x13881";
 export const devChainId = 1337;
 
-export const nftContractAddress = "0x8d64155F24674067ea09cbAB74c4ff99E220e3D3";
+export const nftContractAddress = "0x17FAd95EB36EEC17c1E6DDF8e1CCD3C444B99071";
 
 export const IMAGE_URL =
-  "https://gateway.pinata.cloud/ipfs/QmYCrmBY6Wk2mn1Yq868QDzuVL2LSG9NvC7SykqyBSTTgh";
+  "https://ugnie2vqerzywroilo3dk4lerfv2xxidwfxxy2w5koozrtkwhq.arweave.net/oZqCarAkc4tFyFu2NXFki_Wur3QOxb3xq3VOdmM1WPE";
 
 export const CERAMIC_ENDPOINT =
   "https://ceramic-private-clay.3boxlabs.com/api/v0/streams/";
