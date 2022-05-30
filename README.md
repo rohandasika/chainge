@@ -1,4 +1,4 @@
-<img src="chainge-logos.jpeg" width=275 align="right"/>
+<img src="chainge-logos.jpeg" width=400 align="right"/>
 
 # Chainge: the chain of change
 
@@ -92,7 +92,7 @@ Chainge is built and tested fully on the Polygon Mumbai test network. Since this
 ### Stability and UX
 
 - Currently the CAIP-10 Link is manually triggered _after_ the user logs in, with them having to sign another message to establish the link. This is a temporary solution until the app is updated to allow automatic linking.
-- Ceramic just transitioned to the Ceramic v2, which uses the new [Sign-In With Ethereum](https://login.xyz/) standard to create a DID:PKH, instead of a 3ID DID. This greatly eases the user flow by limiting the number of signatures needed to create a DID.
+- Ceramic just transitioned to the Ceramic v2, which uses the new [Sign-In With Ethereum](https://login.xyz/) standard to create a DID:PKH, instead of a 3ID DID. This greatly eases UX by limiting the number of signatures needed to create a DID.
 - When the app first opens, it takes a few seconds for the connections to be made and for the Ceramic streams to be loaded. So typically, a user has to wait around 5s before they can click `connect` and log in.
 
 ### Features
@@ -107,13 +107,13 @@ Chainge is built and tested fully on the Polygon Mumbai test network. Since this
 Clone the repo:
 
 ```
-mkdir chainge
 git clone <repo link>
 ```
 
 Download all dependencies:
 
 ```
+cd chainge
 // From the root directory
 npm install
 
