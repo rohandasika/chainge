@@ -6,9 +6,11 @@ Chainge is a web3 dApp that empowers users to create change around themselves an
 
 This project was conceptualized and built during the [EthShanghai 2022](https://hackathon.ethshanghai.org/) hackathon. Follow me on [Twitter](https://twitter.com/rohandasika) or [LinkedIn](https://www.linkedin.com/in/rohandasika/)!
 
-> App front-end deployed on [Arweave](https://vfkzxr5zcu3cgjb7dfbeukbkuohdh56esgledqjzkau4kwi4sm.arweave.net/qVWbx7kVNiMkPxlCSigqo44z98SRl_kHBOVApxVkck0/)
+> App front-end deployed on Arweave [here](https://vfkzxr5zcu3cgjb7dfbeukbkuohdh56esgledqjzkau4kwi4sm.arweave.net/qVWbx7kVNiMkPxlCSigqo44z98SRl_kHBOVApxVkck0/)
 
-> Contract deployed on [Polygon Mumbai testnet](https://mumbai.polygonscan.com/address/0x9f15E1cF4af56117f8d83977C8529F3C5fb8266F)
+> Contract deployed on Polygon Mumbai testnet [here](https://mumbai.polygonscan.com/address/0x9f15E1cF4af56117f8d83977C8529F3C5fb8266F)
+
+> [Video Demo](https://www.loom.com/share/aaa03e31fbe944a28eaf6c3a2160e8ef)
 
 # Contents
 
@@ -30,8 +32,6 @@ This project was conceptualized and built during the [EthShanghai 2022](https://
 - UI library: [Material UI React](https://mui.com/material-ui/getting-started/installation/)
 
 ## How it works
-
-> [Video Demo](https://www.loom.com/share/aaa03e31fbe944a28eaf6c3a2160e8ef)
 
 ### NFT metadata
 
